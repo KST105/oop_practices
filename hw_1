@@ -1,1 +1,165 @@
+## **Задача №1.**
 
+"""Сформировать класс "Animal" для представления сущности «Животное» в программе.
+В качестве полей задаются: имя животного (строка), вид животного (строка), возраст (число).
+Реализовать следующие операции: вывести звук, который издает животное (строка).
+Реализовать метод вывода информации о животном на экран.
+Метод вывода на экран должен аккумулировать состояние полей объекта."""
+
+class Animal:
+
+    name: str
+    type: str
+    age: int
+
+    def __init__(self, name, type, age):
+        self.name = name
+        self.type = type
+        self.age = age
+
+    def make_sound(self) -> str:
+        sound = f"{self.type} makes a distinctive sound"
+        return sound
+
+    def show_animal(self) -> str:
+
+        name = self.name
+        type = self.type
+        age = self.age
+
+        return f"{name}\n{type}\n{age}"
+
+## **Задача №2.**
+
+"""Сформировать класс «Book» для представления сущности «Книга» в программе. 
+В качестве полей задаются: наименование книги (строка), автор книги (строка), количество страниц (число). 
+Реализовать операции: «отрыть» указанную страницу (на вход в метод передается номер страницы и выводится строка, открылась страница или нет). 
+Реализовать метод вывода информации о книге на экран. Метод вывода на экран должен аккумулировать состояние полей объекта."""
+
+class Book:
+
+    title: str
+    author: str
+    number_pages: int
+
+    def __init__(self, title,author, number_pages):
+        self.title = title
+        self.author = author
+        self.number_pages = number_pages
+
+    def open_book(self, page):
+        if page > self.number_pages:
+            return "Page not found"
+
+        return f"{page} pages of the book are shown"
+
+    def show_book(self) -> str:
+        title = self.title
+        author = self.author
+        number_pages = self.number_pages
+
+        return f"{title}\n{author}\n{number_pages}"
+
+## **Задача №3.**
+
+"""Сформировать класс «**PassengerPlane**» для представления сущности «Пассажирский Самолет» в программе. 
+В качестве полей задаются: производитель самолета, модель самолета, вместимость, пассажиров, текущая высота, текущая скорость. 
+Реализовать следующие операции: взлет самолета, посадка самолета, изменение высоты, изменение скорости. 
+Реализовать метод вывода информации о пассажирском самолете на экран. 
+Метод вывода на экран должен аккумулировать состояние полей объекта."""
+
+class PassengerPlane:
+
+    manufacturer: str
+    model: str
+    capacity: int
+    current_altitude: int
+    current_speed: int
+
+    def __init__(self, manufacturer, model, capacity, current_altitude, current_speed):
+
+        self.manufacturer = manufacturer
+        self.model = model
+        self.capacity = capacity
+        self.current_altitude = current_altitude
+        self.current_speed = current_speed
+
+
+    def takeoff_airplane(self):
+        self.current_speed = self.changing_speed("positive", 270)
+        self.current_altitude = self.changing_altitude ("positive", 1000)
+
+        return "The plane took off"
+
+    def landing_airplane(self):
+        self.current_altitude = self.changing_altitude("negative", 0)
+        self.current_speed = self.changing_speed("negative", 0)
+
+        return "The plane landing"
+
+    def changing_altitude(self, direction: str, meaning: int):
+        if direction == "positive":
+            self.current_altitude += meaning
+        elif direction == "negative":
+            self.current_altitude -= meaning
+        else:
+            return "enter the correct direction value (positive or negative)"
+
+    def changing_speed(self, direction: str, meaning: int):
+        if direction == "positive":
+            self.current_speed += meaning
+        elif direction == "negative":
+            self.current_speed -= meaning
+        else:
+            return "enter the correct direction value (positive or negative)"
+
+    def show_airplane(self) -> str:
+
+        manufacturer = self.manufacturer
+        model = self.model
+        capacity = self.capacity
+        current_altitud = self.current_altitude
+        current_speed = self.current_speed
+
+        return f"{manufacturer }\n{model}\n{capacity}\n{current_altitud}\n{current_speed}"
+
+
+## **Задача №4.**
+
+"""Сформировать класс «**MusicAlum**»b для представления сущности «Музыкальный Альбом» в программе.
+В качестве полей задаются: исполнитель, название альбома, жанр, список треков. 
+Реализовать следующие операции: добавить трек в альбом, удалить трек из альбома, воспроизвести указанный трек. Реализовать метод вывода информации о музыкальном альбоме на экран. 
+Метод вывода на экран должен аккумулировать состояние полей объекта."""
+
+class MusicAlum:
+
+    artist: str
+    album_title: str
+    genre: str
+    track_list: list[str]
+
+    def __init__(self, artist, album_title, genre, track_list):
+        self.artist = artist
+        self.album_title = album_title
+        self.genre = genre
+        self.track_list = track_list
+
+    def add_track(self, track_title):
+        self.track_list.append(track_title)
+
+    def delete_track(self, track_title):
+        self.track_list.remove(track_title)
+
+    def play_track(self, track_title):
+        if self.track_list.index(track_title):
+            return f"The track titled {track_title} was played"
+        else:
+            return f"The track titled {track_title} was not found"
+
+    def show_album(self) -> str:
+        artist = self.artist
+        album_title = self.album_title
+        genre = self.genre
+        track_list = self.track_list
+
+        return f"{artist}\n{album_title}\n{genre}\n{track_list}"
